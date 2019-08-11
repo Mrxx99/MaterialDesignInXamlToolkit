@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using MaterialDesignThemes.Wpf.Transitions;
 
@@ -436,6 +437,18 @@ namespace MaterialDesignThemes.Wpf
             set { SetValue(PopupStyleProperty, value); }
         }
 
+        public static readonly DependencyProperty OverlayOpacityProperty =
+            DependencyProperty.Register(nameof(OverlayOpacity), typeof(double), typeof(DialogHost), new PropertyMetadata(0.56d));
+
+        /// <summary>
+        /// Represents the overlay opacity that is used to dim the background behind the dialog
+        /// </summary>
+        public double OverlayOpacity
+        {
+            get { return (double)GetValue(OverlayOpacityProperty); }
+            set { SetValue(OverlayOpacityProperty, value); }
+        }
+
         public override void OnApplyTemplate()
         {
             if (_contentCoverGrid != null)
@@ -449,6 +462,18 @@ namespace MaterialDesignThemes.Wpf
                 _contentCoverGrid.MouseLeftButtonUp += ContentCoverGridOnMouseLeftButtonUp;
 
             VisualStateManager.GoToState(this, SelectState(), false);
+
+            EasingDoubleKeyFrame opacitySourceKeyFrameClosedToOpen = Template.FindName("OpacitySourceKeyFrameClosedToOpen", this) as EasingDoubleKeyFrame;
+            var binding = new Binding(nameof(OverlayOpacity)) { Source = this };
+            BindingOperations.SetBinding(opacitySourceKeyFrameClosedToOpen, EasingDoubleKeyFrame.ValueProperty, binding);
+
+            EasingDoubleKeyFrame opacitySourceKeyFrameOpenToClose = Template.FindName("OpacitySourceKeyFrameOpenToClose", this) as EasingDoubleKeyFrame;
+            binding = new Binding(nameof(OverlayOpacity)) { Source = this };
+            BindingOperations.SetBinding(opacitySourceKeyFrameOpenToClose, EasingDoubleKeyFrame.ValueProperty, binding);
+
+            DoubleAnimation opacitySourceAnimationOpen = Template.FindName("OpacitySourceAnimationOpen", this) as DoubleAnimation;
+            binding = new Binding(nameof(OverlayOpacity)) { Source = this };
+            BindingOperations.SetBinding(opacitySourceAnimationOpen, DoubleAnimation.ToProperty, binding);
 
             base.OnApplyTemplate();
         }
