@@ -28,6 +28,14 @@
                     <controls:ToggleSwitch IsChecked="True" HorizontalAlignment="Left" />
                     <Button Width="100" Margin="0 8 0 0" Content="Nice" HorizontalAlignment="Left"
                             Style="{StaticResource MahApps.Styles.Button.AccentedSquare}" />
+                    <controls:DropDownButton Content="_Test">
+                        <controls:DropDownButton.Items>
+                            <MenuItem Header="_Hi1">
+                                
+                            </MenuItem>
+                            <MenuItem Header="_au"/>
+                        </controls:DropDownButton.Items>
+                    </controls:DropDownButton>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Sliders">

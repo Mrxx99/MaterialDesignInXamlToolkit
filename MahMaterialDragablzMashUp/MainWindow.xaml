@@ -30,7 +30,19 @@
             </wpf:PopupBox>
         </controls:WindowCommands>
     </controls:MetroWindow.LeftWindowCommands>
-        <dockablz:Layout>
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <controls:DropDownButton Content="_Test">
+                <controls:DropDownButton.Items>
+                    <MenuItem Header="_Hi1">
+                        <MenuItem Header="bua"/>
+                    </MenuItem>
+                    <MenuItem Header="_au"/>
+                </controls:DropDownButton.Items>
+            </controls:DropDownButton>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    <dockablz:Layout>
         <dragablz:TabablzControl BorderThickness="0"
                                  Margin="0,-1,0,1">
             <dragablz:TabablzControl.InterTabController>
@@ -52,7 +64,7 @@
                         <mahMaterialDragablzMashUp:PaletteSelectorViewModel />
                     </mahMaterialDragablzMashUp:PaletteSelector.DataContext>
                 </mahMaterialDragablzMashUp:PaletteSelector>
-            </TabItem>           
+            </TabItem>
         </dragablz:TabablzControl>
     </dockablz:Layout>
 </controls:MetroWindow>
